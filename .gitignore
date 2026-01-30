@@ -1,0 +1,22 @@
+# build artifacts
+build/
+cmake-build-*/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.cmake
+
+# VS Code
+.vscode/
+
+# Compiled binaries
+*.o
+*.a
+*.so
+*.exe
+
+# macOS
+.DS_Store
+
