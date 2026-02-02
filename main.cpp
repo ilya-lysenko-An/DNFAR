@@ -15,7 +15,7 @@ int main() {
     auto signals = generateAntennaSignals(
         sources,
         N,
-        28,0,
+        28.0,
         15e6,
         Fs,
         L,
