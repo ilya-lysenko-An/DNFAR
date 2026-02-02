@@ -127,4 +127,22 @@ std::vector<cdouble> calculateWeights(
 }
 
 
+std::vector<cdouble> beamformSignal (
+    const std::vector<std::vector<cdouble>>& signals,
+    const std::vector<cdouble>& weights
+) {
+    int N = signals.size();
+    if (N == 0) return {};
+    int L = signals[0].size();
+
+    std::vector<cdouble> result(L, 0);
+
+    for (int n = 0; n < N; ++n ){
+        for (int t = 0; t < L; ++t){
+            result[t] = signals[n][t] * weights[n];
+        }
+    }
+    return result;
+}
+
 

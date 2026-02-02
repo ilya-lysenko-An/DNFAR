@@ -32,3 +32,10 @@ std::vector<cdouble> beamformSignal(
     const std::vector<std::vector<cdouble>>& signals, // [N][L]
     const std::vector<cdouble>& weights               // Wi 
 );
+
+std::vector<cdouble> calculateWeights(
+    double R,
+    double fc,
+    double phi0_deg,
+    const std::vector<double>& antennaAzimuth
+);
