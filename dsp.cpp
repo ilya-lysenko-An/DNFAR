@@ -107,5 +107,24 @@ std::vector<cdouble> fft(const std::vector<cdouble>& x)
     return X;
 }
 
+std::vector<cdouble> calculateWeights(
+    double R,
+    double fc,
+    double phi0_deg,
+    const std::vector<double>& antennaAzimuth
+){
+    std::vector<cdouble> W;
+    double c = 3e8;
+    double lambda = c / fc;
+    double phi0_rad = phi0_deg * M_PI / 180.0;
+
+    for (double alpha_deg : antennaAzimuth){
+        double alpha_rad = alpha_deg * M_PI / 180.0;
+        double phase = 2 * M_PI * R * cos(phi0_rad - alpha_rad) / lambda;
+        W.push_back(std::exp(cdouble(0, phase)));
+    }
+    return W;
+}
+
 
 

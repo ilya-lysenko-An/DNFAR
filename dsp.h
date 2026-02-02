@@ -27,3 +27,8 @@ std::vector<cdouble> downconvert(const std::vector<double>& signal, double fc, d
 
 // FFT (базовая, можно позже заменить на библиотеку)
 std::vector<cdouble> fft(const std::vector<cdouble>& x);
+
+std::vector<cdouble> beamformSignal(
+    const std::vector<std::vector<cdouble>>& signals, // [N][L]
+    const std::vector<cdouble>& weights               // Wi 
+);
