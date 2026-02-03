@@ -2,18 +2,31 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <fstream>
 
 int main() {
-    // ====== 1. Источники сигнала ======
+    double angel1_deg = 0.0;
+    double angel2_deg = 0.0;
+    double steer_deg = 0.0;
+
+    std::cout << "Введите угол прихода 1-го сигнала (градусы)";
+    std::cin >> angel1_deg;
+
+    std::cout << "Введите угол прихода 2-го сигнала (градусы)";
+    std::cin >> angel2_deg;
+
+    std::cout << "Введите угол фазирования ФАР (гардусы)";
+    std::cin >> steer_deg;
+
     std::vector<Source> sources = {
-        {12e6, 90.0, 1.0},   // сигнал 12 МГц, азимут 90°
-        {17e6, 140.0, 1.0}   // сигнал 17 МГц, азимут 140°
+        {14e6, angel1_deg, 1.0},   
+        {16e6, angel2_deg, 1.0}   
     };
 
     // ====== 2. Параметры ФАР ======
     int N = 8;          // число антенн
     int L = 4096;       // длина сигнала (отсчёты)
-    double Fs = 50e6;   // частота дискретизации
+    double Fs = 100e6;   // частота дискретизации
     double R = 28.0;    // радиус ФАР
     double fc = 15e6;   // несущая частота
     double SNR = 10.0;  // отношение сигнал/шум
@@ -27,7 +40,7 @@ int main() {
         antennaAzimuths.push_back(i * 360.0 / N);
 
     // ====== 5. Расчёт весовых коэффициентов ======
-    double phi0 = 90.0; // направление главного максимума (азимут)
+    double phi0 = steer_deg; // направление главного максимума (азимут)
     auto weights = calculateWeights(R, fc, phi0, antennaAzimuths);
 
     // ====== 6. Формирование сигнала ФАР ======
@@ -38,6 +51,8 @@ int main() {
 
     // ====== 8. Вывод спектра ======
     std::cout << "=== Спектр сигнала после фазирования ===" << std::endl;
+    std::ofstream out("spectrum.csv");
+    out << "freq_mhz,mag\n";
     for (size_t k = 0; k < L / 2; ++k) {
         double freq = k * Fs / L;
         double mag = std::abs(spectrum[k]);
@@ -45,7 +60,9 @@ int main() {
             std::cout << "f = " << freq / 1e6
                       << " MHz, |X| = " << mag << std::endl;
         }
+        out << (freq / 1e6) << "," << mag << "\n";
     }
+    out.close();
 
     return 0;
 }

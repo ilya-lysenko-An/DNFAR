@@ -52,7 +52,7 @@ std::vector<std::vector<cdouble>> generateAntennaSignals(
 
                 // Сигнал на несущей
                 double phase =
-                    2.0 * M_PI * (fc + src.freq) * t - phaseDelay;
+                    2.0 * M_PI * + src.freq * t - phaseDelay;
 
                 sample += src.amplitude * std::polar(1.0, phase);
             }
@@ -121,7 +121,7 @@ std::vector<cdouble> calculateWeights(
     for (double alpha_deg : antennaAzimuth){
         double alpha_rad = alpha_deg * M_PI / 180.0;
         double phase = 2 * M_PI * R * cos(phi0_rad - alpha_rad) / lambda;
-        W.push_back(std::exp(cdouble(0, -phase)));
+        W.push_back(std::exp(cdouble(0, +phase)));
     }
     return W;
 }
