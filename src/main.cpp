@@ -1,8 +1,12 @@
-#include "dsp.h"
+#include "common/types.h"
+#include "signal/signal_generator.h"
+#include "dsp/beamforming.h"
+#include "dsp/fft.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
 #include <fstream>
+
 
 int main() {
     double angel1_deg = 0.0;

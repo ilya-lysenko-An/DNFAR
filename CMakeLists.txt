@@ -7,10 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(phased_array
-    main.cpp
-    dsp.cpp
+    src/main.cpp
+    src/signal/signal_generator.cpp
+    src/dsp/beamforming.cpp
+    src/dsp/fft.cpp
 )
 
 target_include_directories(phased_array PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
