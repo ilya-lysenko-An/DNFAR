@@ -4,7 +4,7 @@
 
 std::vector<double> computeBeamPattern (
     const std::vector<cdouble>& weights,
-    const std::vector<double> antennaAzimuths_deg,
+    const std::vector<double>& antennaAzimuths_deg,
     double R,
     double fc,
     int N

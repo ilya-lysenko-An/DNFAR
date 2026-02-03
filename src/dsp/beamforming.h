@@ -10,6 +10,6 @@ std::vector<cdouble> calculateWeights(
 );
 
 std::vector<cdouble> beamformSignal(
-    const std::vector<std::vector<cdouble>>& signals,
+    const std::vector<std::vector<cdouble>>& signals_in,
     const std::vector<cdouble>& weights
 );
