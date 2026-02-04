@@ -19,6 +19,7 @@ add_executable(phased_array
     src/dsp/beamforming.cpp
     src/dsp/fft.cpp
     src/dsp/pattern.cpp
+    src/dsp/stft.cpp
 )
 
 target_include_directories(phased_array PRIVATE
