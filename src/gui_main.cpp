@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <algorithm>
 
 #include "common/types.h"
 #include "signal/signal_generator.h"
@@ -111,11 +112,17 @@ int main(int argc, char *argv[])
 
         auto spectrum = fft(farSignal);
 
+        double maxMag = 0.0;
+        for (int k = 0; k < L; ++k){
+            maxMag = std::max(maxMag, std::abs(spectrum[k]));
+        }
+
         QLineSeries *series = new QLineSeries();
         for (int k = 0; k < L / 2; ++k) {
             double freq = k * Fs / L; // Гц
             double mag = std::abs(spectrum[k]);
-            series->append(freq / 1e6, mag); // МГц
+            double mag_db = 20.0 * std::log10((mag + 1e-12) / (maxMag + 1e-12));
+            series->append(freq / 1e6, mag_db);
         }
 
         QChart *chart = new QChart();
